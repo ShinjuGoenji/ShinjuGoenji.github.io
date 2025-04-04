@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Malicious Page</title>
+    <title>登入頁面</title>
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -14,23 +14,41 @@
         height: 100vh;
         margin: 0;
         position: relative;
-        text-align: center;
       }
-      .message-container {
+      .login-container {
         background-color: #fff;
         padding: 20px;
         border-radius: 5px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         width: 300px;
+        z-index: 1;
       }
-      .message-container h2 {
+      .login-container h2 {
         margin-bottom: 20px;
-        color: #d9534f;
+        text-align: center;
+      }
+      .login-container input[type="text"],
+      .login-container input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+      }
+      .login-container button {
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        border: none;
+        border-radius: 5px;
+        color: #fff;
+        font-size: 16px;
+        cursor: pointer;
       }
       .iframe-container {
         position: absolute;
-        top: 20px;
-        right: 20px;
+        top: 10px;
+        right: 10px;
         width: 300px;
         height: 200px;
         border: none;
@@ -38,48 +56,27 @@
     </style>
   </head>
   <body>
-    <div class="message-container">
-      <h2>MALICIOUS PAGE with iframe</h2>
-      <!-- <p>This is a simple malicious page showcasing an iframe embed.</p> -->
-      <p>123</p>
+    <div class="login-container">
+      <h2>登入</h2>
+      <form action="#" method="post">
+        <input
+          type="text"
+          name="username"
+          placeholder="帳號"
+          autocomplete="username"
+        />
+        <input
+          type="password"
+          name="password"
+          placeholder="密碼"
+          autocomplete="current-password"
+        />
+        <button type="submit">登入</button>
+      </form>
     </div>
     <iframe
       class="iframe-container"
-      src="https://idm.nycu.ust.edu.tw/sso/886UST_NYCU/saml2/login/"
-      id="loginIframe"
+      src="https://fishsu16.github.io/Critique_1/?username=critique1&password=password&fbclid=IwY2xjawJbizlleHRuA2FlbQIxMAABHb_ZwjhOiOQEAvg5aRxKNSikSWNK6TT2MAt6J-HZjJuirgy9cpb_vQrsag_aem_9ryIV5xOOYbnQWU_g3fCnQ#"
     ></iframe>
-
-    <script>
-      // Function to check if input fields are filled
-      function checkForm() {
-        const iframe = document.getElementById("loginIframe");
-        const iframeDocument =
-          iframe.contentDocument || iframe.contentWindow.document;
-
-        // Get the login form fields (adjust the selectors as needed)
-        const usernameField = iframeDocument.querySelector(
-          'input[name="username"]'
-        );
-        const passwordField = iframeDocument.querySelector(
-          'input[name="password"]'
-        );
-
-        // Check if both fields are filled
-        if (
-          //usernameField &&
-          //passwordField &&
-          //usernameField.value &&
-          //passwordField.value
-          true
-        ) {
-          // Show the popup window
-          // alert("Login information has been filled!");
-          window.pop(usernameField.value);
-        }
-      }
-
-      // Set an interval to monitor the fields
-      setInterval(checkForm, 1000); // Check every second
-    </script>
   </body>
 </html>
