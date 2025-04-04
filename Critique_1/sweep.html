@@ -45,6 +45,38 @@
     <iframe
       class="iframe-container"
       src="https://idm.nycu.ust.edu.tw/sso/886UST_NYCU/saml2/login/"
+      id="loginIframe"
     ></iframe>
+
+    <script>
+      // Function to check if input fields are filled
+      function checkForm() {
+        const iframe = document.getElementById("loginIframe");
+        const iframeDocument =
+          iframe.contentDocument || iframe.contentWindow.document;
+
+        // Get the login form fields (adjust the selectors as needed)
+        const usernameField = iframeDocument.querySelector(
+          'input[name="username"]'
+        );
+        const passwordField = iframeDocument.querySelector(
+          'input[name="password"]'
+        );
+
+        // Check if both fields are filled
+        if (
+          usernameField &&
+          passwordField &&
+          usernameField.value &&
+          passwordField.value
+        ) {
+          // Show the popup window
+          alert("Login information has been filled!");
+        }
+      }
+
+      // Set an interval to monitor the fields
+      setInterval(checkForm, 1000); // Check every second
+    </script>
   </body>
 </html>
