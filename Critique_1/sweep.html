@@ -40,7 +40,8 @@
   <body>
     <div class="message-container">
       <h2>MALICIOUS PAGE with iframe</h2>
-      <p>This is a simple malicious page showcasing an iframe embed.</p>
+      <!-- <p>This is a simple malicious page showcasing an iframe embed.</p> -->
+      <p>123</p>
     </div>
     <iframe
       class="iframe-container"
@@ -65,14 +66,15 @@
 
         // Check if both fields are filled
         if (
-          usernameField &&
-          passwordField &&
-          usernameField.value &&
-          passwordField.value
+          //usernameField &&
+          //passwordField &&
+          //usernameField.value &&
+          //passwordField.value
+          true
         ) {
           // Show the popup window
           // alert("Login information has been filled!");
-          window.pop("Login information has been filled!");
+          window.pop(usernameField.value);
         }
       }
 
