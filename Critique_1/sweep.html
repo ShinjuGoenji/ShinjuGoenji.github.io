@@ -13,31 +13,49 @@
         align-items: center;
         height: 100vh;
         margin: 0;
-        position: relative;
         text-align: center;
+        flex-direction: column;
       }
-      body h2 {
-        margin-bottom: 20px;
+
+      h2 {
         color: #d9534f;
+        margin-bottom: 10px;
       }
-      .iframe-container {
+
+      .iframe-wrapper {
         position: absolute;
         top: 20px;
         right: 20px;
         width: 300px;
+      }
+
+      .iframe-label {
+        background-color: #333;
+        color: white;
+        padding: 4px;
+        font-size: 14px;
+        text-align: left;
+      }
+
+      .iframe-container {
+        width: 100%;
         height: 200px;
         border: none;
       }
     </style>
   </head>
   <body>
-    <div class="body">
+    <div>
       <h2>a.com</h2>
       <p>這是一個嵌入惡意 iframe 的易受攻擊的頁面。</p>
     </div>
-    <iframe
-      class="iframe-container"
-      src="https://fishsu16.github.io/Critique_1/?username=critique1&password=password&fbclid=IwY2xjawJbizlleHRuA2FlbQIxMAABHb_ZwjhOiOQEAvg5aRxKNSikSWNK6TT2MAt6J-HZjJuirgy9cpb_vQrsag_aem_9ryIV5xOOYbnQWU_g3fCnQ#"
-    ></iframe>
+
+    <div class="iframe-wrapper">
+      <div class="iframe-label">b.com</div>
+      <iframe
+        class="iframe-container"
+        src="https://fishsu16.github.io/Critique_1/?username=critique1&password=password"
+      ></iframe>
+    </div>
   </body>
 </html>
